@@ -11,22 +11,23 @@ import {
 
 import * as utils from "../utils";
 
-const StyledSelect = styled.div`
+const StyledSelect: any = styled.div`
   color: #fff;
   position: relative;
   min-width: 200px;
   background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  z-index: 100;
+  border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
 `;
 
-const SelectedOption: any = styled.div`
+const SelectedOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem;
   padding: 0.2rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
 `;
 
 const OptionsContainer = styled.div`
@@ -38,6 +39,10 @@ const OptionsContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
   z-index: 999;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: rgba(0, 0, 0, 1);
+  }
 `;
 
 const StyledOption = styled.div`
@@ -62,18 +67,16 @@ const Option = ({ children, onClick }: any) => {
   return <StyledOption onClick={onClick}>{children}</StyledOption>;
 };
 
-const Select = ({ options, placeholder }: SelectProps) => {
+const Select = ({ options, placeholder, onChange }: SelectPropsType) => {
   const arrOptions: Array<string> = utils.inArrayStr(options);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(placeholder);
   const transition = useTransition(open, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    from: { opacity: 0, transform: "translateX(-20px)" },
+    enter: { opacity: 1, transform: "translateX(0)" },
+    leave: { opacity: 0, transform: "translateX(-20px)" }
   });
-
-  console.log(value);
 
   const handleOpen = (): void => {
     setOpen(!open);
@@ -82,11 +85,12 @@ const Select = ({ options, placeholder }: SelectProps) => {
   const handleChange = (value: string): void => {
     setValue(value);
     setOpen(false);
+    onChange(value);
   };
 
   return (
-    <StyledSelect>
-      <SelectedOption isOpen={open} onClick={handleOpen}>
+    <StyledSelect isOpen={open}>
+      <SelectedOption onClick={handleOpen}>
         {value}
         <Icon isOpen={open} className='material-icons'>
           keyboard_arrow_down
@@ -109,9 +113,10 @@ const Select = ({ options, placeholder }: SelectProps) => {
     </StyledSelect>
   );
 };
-interface SelectProps {
+interface SelectPropsType {
   options: Array<Category | Ingredient | Glass | Alcoholic>;
   placeholder: string;
+  onChange: (category: string) => void;
 }
 
 export default Select;

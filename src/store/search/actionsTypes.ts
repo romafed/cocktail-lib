@@ -17,30 +17,42 @@ export enum ActionTypes {
   GET_CATEGORIES_LIST = "GET_CATEGORIES_LIST",
   GET_CATEGORIES_LIST_PENDING = "GET_CATEGORIES_LIST_PENDING",
   GET_CATEGORIES_LIST_FULFILLED = "GET_CATEGORIES_LIST_FULFILLED",
-  GET_CATEGORIES_LIST_REJECTED = "GET_CATEGORIES_LIST_REJECTED"
+  GET_CATEGORIES_LIST_REJECTED = "GET_CATEGORIES_LIST_REJECTED",
+
+  GET_COCKTAIL_BY_CATEGORY = "GET_COCKTAIL_BY_CATEGORY",
+  GET_COCKTAIL_BY_CATEGORY_PENDING = "GET_COCKTAIL_BY_CATEGORY_PENDING",
+  GET_COCKTAIL_BY_CATEGORY_FULFILLED = "GET_COCKTAIL_BY_CATEGORY_FULFILLED",
+  GET_COCKTAIL_BY_CATEGORY_REJECTED = "GET_COCKTAIL_BY_CATEGORY_REJECTED"
 }
 
 // Common types
- export interface Category {
+export interface Category {
   strCategory: string;
-};
- export interface Ingredient {
+}
+export interface Ingredient {
   strIngredient1: string;
 }
- export interface Glass {
+export interface Glass {
   strGlass: string;
 }
- export interface Alcoholic {
+export interface Alcoholic {
   strAlcoholic: string;
 }
 
+export interface Cocktail {
+  strDrink: string;
+  strDrinkThumb: string;
+  idDrink: string;
+}
 // State type
 
 export interface SearchState {
+  loading: Boolean;
   categories: Category[];
   alcoholics: Alcoholic[];
   ingredients: Ingredient[];
   glasses: Glass[];
+  cocktails: Cocktail[];
 }
 
 // Action types
@@ -64,8 +76,14 @@ export interface GetGlassesAction {
   payload: Promise<Glass[]>;
 }
 
+export interface GetGetCocktailByCategoryAction {
+  type: string;
+  payload: Promise<Cocktail[]>;
+}
+
 export type SearchActionTypes =
   | GetCategoriesAction
   | GetAlcoholicAction
   | GetIngredientsAction
-  | GetGlassesAction;
+  | GetGlassesAction
+  | GetGetCocktailByCategoryAction;

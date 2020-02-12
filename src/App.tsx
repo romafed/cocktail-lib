@@ -9,6 +9,7 @@ import BACKGROUND from "./assets/background.jpg";
 
 const StyledApp = styled.div`
   background-image: url(${BACKGROUND});
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -6,7 +6,8 @@ import {
   GetCategoriesAction,
   GetAlcoholicAction,
   GetIngredientsAction,
-  GetGlassesAction
+  GetGlassesAction,
+  GetGetCocktailByCategoryAction
 } from "./actionsTypes";
 import * as api from "./api";
 
@@ -42,7 +43,15 @@ const getGlasses: GetGlasses = () => {
   };
 };
 
-export type HandleGetAllList = () => ThunkAction<Promise<void>, {}, {}, AnyAction>;
+type GetCocktailByCategory = (category: string) => GetGetCocktailByCategoryAction;
+export const getCocktailByCategory: GetCocktailByCategory = (category: string) => {
+  return {
+    type: ActionTypes.GET_COCKTAIL_BY_CATEGORY,
+    payload: api.getCocktailByCategory(category),
+  }
+};
+
+type HandleGetAllList = () => ThunkAction<Promise<void>,{},{},AnyAction>;
 export const handleGetAllList: HandleGetAllList = () => async (
   dispatch: Dispatch
 ) => {

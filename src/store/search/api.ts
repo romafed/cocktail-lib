@@ -47,3 +47,14 @@ export const getGlasses = async () => {
   const res: AxiosResponse = await axios.get(url("list"), config);
   return res.data.drinks;
 };
+
+export const getCocktailByCategory = async (category: string) => {
+  const config: AxiosRequestConfig = {
+    params: {
+      c: category
+    }
+  };
+
+  const res: AxiosResponse = await axios.get(url("filter"), config);
+  return res.data.drinks;
+};

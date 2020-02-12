@@ -11,14 +11,6 @@ import {
 
 import Select from "../../components/Select";
 
-interface SearchProps {
-  categories: Category[];
-  ingredients: Ingredient[];
-  glasses: Glass[];
-  alcoholics: Alcoholic[];
-  handleGetAllLIst: () => void;
-}
-
 const StyledSearch = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,16 +26,24 @@ const Header = styled.h1`
   transition: all 0.3s ease-in-out;
 `;
 
-const view = ({ handleGetAllLIst, categories }: SearchProps) => {
+const view = ({ handleGetAllList, categories, alcoholics }: SearchProps) => {
   useEffect(() => {
-    handleGetAllLIst();
-  }, [handleGetAllLIst]);
+    handleGetAllList();
+  }, [handleGetAllList]);
   return (
     <StyledSearch>
       <Header>Search page</Header>
-      <Select options={categories} />
+      <Select placeholder={"Select category"} options={categories} />
     </StyledSearch>
   );
 };
+
+interface SearchProps {
+  categories: Category[];
+  ingredients: Ingredient[];
+  glasses: Glass[];
+  alcoholics: Alcoholic[];
+  handleGetAllList: () => void;
+}
 
 export default view;

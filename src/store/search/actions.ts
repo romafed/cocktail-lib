@@ -42,9 +42,8 @@ const getGlasses: GetGlasses = () => {
   };
 };
 
-export type HandleGetAllLIst = () => ThunkAction<Promise<void>, {}, {}, AnyAction>;
-
-export const handleGetAllLIst: HandleGetAllLIst = () => async (
+export type HandleGetAllList = () => ThunkAction<Promise<void>, {}, {}, AnyAction>;
+export const handleGetAllList: HandleGetAllList = () => async (
   dispatch: Dispatch
 ) => {
   dispatch(getCategories());

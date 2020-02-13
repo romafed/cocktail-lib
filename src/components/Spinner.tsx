@@ -12,7 +12,7 @@ const rotate360 = keyframes`
 `;
 
 const SpinnerWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -20,7 +20,7 @@ const SpinnerWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 200;
 `;
 

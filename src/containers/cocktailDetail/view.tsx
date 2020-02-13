@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const StyledCocktailDetail = styled.div`
@@ -15,12 +17,20 @@ const Header = styled.h1`
   transition: all 0.3s ease-in-out;
 `;
 
-const view = () => {
+const view = ({ match }: any) => {
+  useEffect(() => {
+    console.log(match.params.id);
+  }, []);
+
   return (
     <StyledCocktailDetail>
       <Header>Cocktail detail page</Header>
     </StyledCocktailDetail>
   );
 };
+
+interface ViewPropsType {
+  location: Location;
+}
 
 export default view;

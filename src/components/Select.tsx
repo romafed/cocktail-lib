@@ -17,7 +17,7 @@ const StyledSelect: any = styled.div`
   min-width: 200px;
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 10;
   border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
 `;
 
@@ -67,11 +67,11 @@ const Option = ({ children, onClick }: any) => {
   return <StyledOption onClick={onClick}>{children}</StyledOption>;
 };
 
-const Select = ({ options, placeholder, onChange }: SelectPropsType) => {
+const Select = ({ options, value, onChange, name }: SelectPropsType) => {
   const arrOptions: Array<string> = utils.inArrayStr(options);
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(placeholder);
+  const [selectedValue, setValue] = useState(value);
   const transition = useTransition(open, null, {
     from: { opacity: 0, transform: "translateX(-20px)" },
     enter: { opacity: 1, transform: "translateX(0)" },
@@ -85,13 +85,13 @@ const Select = ({ options, placeholder, onChange }: SelectPropsType) => {
   const handleChange = (value: string): void => {
     setValue(value);
     setOpen(false);
-    onChange(value);
+    onChange(name, value, true);
   };
 
   return (
     <StyledSelect isOpen={open}>
       <SelectedOption onClick={handleOpen}>
-        {value}
+        {selectedValue}
         <Icon isOpen={open} className='material-icons'>
           keyboard_arrow_down
         </Icon>
@@ -115,8 +115,13 @@ const Select = ({ options, placeholder, onChange }: SelectPropsType) => {
 };
 interface SelectPropsType {
   options: Array<Category | Ingredient | Glass | Alcoholic>;
-  placeholder: string;
-  onChange: (category: string) => void;
+  value: string;
+  name: string;
+  onChange: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => any;
 }
 
 export default Select;

@@ -18,13 +18,14 @@ const StyledApp = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
 `;
 
 const App = () => {
   return (
     <StyledApp>
       <Switch>
-        <Route exact path='/details' component={CocktailDetail} />
+        <Route exact path='/details/:id' component={CocktailDetail} />
         <Route path='/' component={Search} />
       </Switch>
     </StyledApp>

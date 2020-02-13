@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import {
@@ -10,9 +10,8 @@ import {
   Cocktail
 } from "../../store/search/actionsTypes";
 
-import Select from "../../components/Select";
-import Button from "../../components/Button";
 import Spinner from "../../components/Spinner";
+import SearchForm from "../../components/SearchForm";
 import CocktailList from "../../components/CocktailList";
 
 // Styles
@@ -34,25 +33,13 @@ const Header = styled.h1`
   transition: all 0.3s ease-in-out;
 `;
 
-const Container = styled.div`
-  display: flex;
-`;
-
 const view = ({
-  handleGetAllList,
-  categories,
   loading,
-  getCocktailByCategory,
-  cocktails
+  categories,
+  cocktails,
+  handleGetAllList,
+  getCocktailByCategory
 }: SearchProps) => {
-  const [value, setValue] = useState("");
-  const handleChange = (value: string): void => {
-    setValue(value);
-  };
-  const handleSubmit = (): void => {
-    getCocktailByCategory(value);
-  };
-
   useEffect(() => {
     handleGetAllList();
   }, [handleGetAllList]);
@@ -60,14 +47,10 @@ const view = ({
   return (
     <StyledSearch>
       <Header>Search for your cocktail</Header>
-      <Container>
-        <Select
-          onChange={handleChange}
-          placeholder={"Select category"}
-          options={categories}
-        />
-        <Button onClick={handleSubmit}>Submit</Button>
-      </Container>
+      <SearchForm
+        onSubmitForm={getCocktailByCategory}
+        categories={categories}
+      />
       <CocktailList cocktails={cocktails} />
       <Spinner show={loading} />
     </StyledSearch>

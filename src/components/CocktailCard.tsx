@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { Cocktail } from "../store/search/actionsTypes";
 
 const StyledCocktailCard = styled.div`
@@ -15,13 +16,17 @@ const StyledCocktailCard = styled.div`
     -webkit-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
+    border-color: red;
   }
 `;
 
 const CocktailName = styled.h3`
+  font-family: "Galada", cursive;
+  letter-spacing: 2px;
   font-size: 1rem;
   color: #fff;
   text-align: center;
+  white-space: pre-wrap;
 `;
 
 const CocktailImage = styled.img`
@@ -31,8 +36,11 @@ const CocktailImage = styled.img`
 `;
 
 const CocktailCard = ({ cocktail }: CocktailCardType) => {
+  const history = useHistory();
+
   return (
-    <StyledCocktailCard>
+    <StyledCocktailCard
+      onClick={() => history.push(`details/${cocktail.idDrink}`)}>
       <CocktailName>{cocktail.strDrink}</CocktailName>
       <CocktailImage src={cocktail.strDrinkThumb} alt='cocktail name' />
     </StyledCocktailCard>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+const StyledButton: any = styled.button`
   border: 2px solid yellow;
   min-width: 100px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -15,16 +15,21 @@ const StyledButton = styled.button`
     color: red;
     border-color: red;
     transform: scale(1.1);
+  };
+  &:disabled {
+    color: red;
+    border-color: red;
   }
 `;
 
-const Button = ({ children, onClick }: ButtonPropsType) => {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
+const Button = ({ type, children, disabled = false }: ButtonPropsType) => {
+  return <StyledButton disabled={disabled} type={type}>{children}</StyledButton>;
 };
 
 interface ButtonPropsType {
   children: string;
-  onClick: () => void;
+  type: string;
+  disabled?: Boolean;
 }
 
 export default Button;

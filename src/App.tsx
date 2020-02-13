@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Switch, Route } from "react-router-dom";
 
 import Search from "./containers/search";
-import CocktailDetail from "./containers/cocktailDetail/view";
+import CocktailDetail from "./containers/details/view";
 
 import BACKGROUND from "./assets/background.jpg";
 

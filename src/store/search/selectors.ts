@@ -14,6 +14,9 @@ export const getGlassesSelector = (state: StateType) =>
 
 export const getLoadingSelector = (state: StateType) =>
   state.searchState.loading;
-  
+
 export const getCocktailsSelector = (state: StateType) =>
   state.searchState.cocktails;
+
+export const getFiltersSelector = (state: StateType) =>
+  state.searchState.filters;

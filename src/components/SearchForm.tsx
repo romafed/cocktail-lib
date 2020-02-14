@@ -6,7 +6,7 @@ import Select from "./Select";
 import Button from "./Button";
 import Error from "./Error";
 
-import { Category } from "../store/search/actionsTypes";
+import { firstLetterToLowerCase } from "../utils";
 
 const FormContainer = styled.form`
   display: flex;
@@ -17,47 +17,72 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
-const SearchForm = ({ categories, onSubmitForm }: SearchFormType) => {
+const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
   const formik = useFormik({
     initialValues: {
-      category: "Select category"
+      filters: "",
+      type: ""
     },
     validate: values => {
       const error: any = {};
-      if (values.category === "Select category") {
-        error.category = "Select field";
+      if (!values.type) {
+        error.type = "Select field";
       }
 
       return error;
     },
     onSubmit: values => {
-      onSubmitForm(values.category);
+      console.log(values);
+      onSubmitForm(values.filters, values.type);
     }
   });
 
+  const handleFirstInputChange = (
+    name: string,
+    value: string | null,
+    shouldValidate?: boolean | undefined
+  ) => {
+    formik.setFieldValue("type", "", shouldValidate);
+    formik.setFieldValue("filters", value, shouldValidate);
+  };
+
   return (
     <FormContainer onSubmit={formik.handleSubmit}>
+      <Select
+        name='filters'
+        placeholder='Select filter'
+        onChange={handleFirstInputChange}
+        value={formik.values.filters}
+        options={filters}
+      />
       <InputGroup>
         <Select
-          name='category'
+          name='type'
+          placeholder={
+            formik.values.filters || !formik.values.type
+              ? `Select ${formik.values.filters}`
+              : "First select filter"
+          }
+          disabled={!!!formik.values.filters}
           onChange={formik.setFieldValue}
-          value={formik.values.category}
-          options={categories}
+          value={formik.values.type}
+          options={values[firstLetterToLowerCase(formik.values.filters)]}
         />
         <Button
-          disabled={!!(formik.touched && formik.errors.category)}
+          disabled={!!(formik.touched && formik.errors.type)}
           type='submit'>
-          Submit
+          Search
         </Button>
       </InputGroup>
-      <Error message={formik.errors.category} />
+      <Error message={formik.errors.type} />
     </FormContainer>
   );
 };
 
 interface SearchFormType {
-  onSubmitForm: (category: string) => void;
-  categories: Category[];
+  values: any;
+  filters: Array<string>;
+  onSubmitForm: (filter: string, params: string) => void;
 }
 
 export default SearchForm;

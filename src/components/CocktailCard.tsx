@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { Cocktail } from "../store/search/actionsTypes";
+import { Cocktail } from "../store/search/types";
 
 const StyledCocktailCard = styled.div`
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   border: 2px solid yellow;
   border-radius: 0.7rem;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   transform: scale(1);
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &:active {
     transform: scale(1.03);
     -webkit-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);

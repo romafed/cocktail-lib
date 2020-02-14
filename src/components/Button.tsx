@@ -11,11 +11,12 @@ const StyledButton: any = styled.button`
   transition: all 0.05s ease-in-out;
   transform: scale(1);
   cursor: pointer;
+  font-family: "Galada", cursive;
   &:active {
     color: red;
     border-color: red;
     transform: scale(1.1);
-  };
+  }
   &:disabled {
     color: red;
     border-color: red;
@@ -23,7 +24,11 @@ const StyledButton: any = styled.button`
 `;
 
 const Button = ({ type, children, disabled = false }: ButtonPropsType) => {
-  return <StyledButton disabled={disabled} type={type}>{children}</StyledButton>;
+  return (
+    <StyledButton disabled={disabled} type={type}>
+      {children}
+    </StyledButton>
+  );
 };
 
 interface ButtonPropsType {

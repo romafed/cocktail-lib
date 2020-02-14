@@ -48,6 +48,7 @@ export interface Cocktail {
 
 export interface SearchState {
   loading: Boolean;
+  filters: Array<string>;
   categories: Category[];
   alcoholics: Alcoholic[];
   ingredients: Ingredient[];
@@ -76,7 +77,7 @@ export interface GetGlassesAction {
   payload: Promise<Glass[]>;
 }
 
-export interface GetGetCocktailByCategoryAction {
+export interface GetCocktailBySearching {
   type: string;
   payload: Promise<Cocktail[]>;
 }
@@ -86,4 +87,4 @@ export type SearchActionTypes =
   | GetAlcoholicAction
   | GetIngredientsAction
   | GetGlassesAction
-  | GetGetCocktailByCategoryAction;
+  | GetCocktailBySearching;

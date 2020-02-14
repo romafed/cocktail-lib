@@ -7,8 +7,8 @@ import {
   GetAlcoholicAction,
   GetIngredientsAction,
   GetGlassesAction,
-  GetGetCocktailByCategoryAction
-} from "./actionsTypes";
+  GetCocktailBySearching
+} from "./types";
 import * as api from "./api";
 
 type GetCategories = () => GetCategoriesAction;
@@ -44,14 +44,16 @@ const getGlasses: GetGlasses = () => {
 };
 
 type GetCocktailByCategory = (
-  category: string
-) => GetGetCocktailByCategoryAction;
-export const getCocktailByCategory: GetCocktailByCategory = (
-  category: string
+  filter: string,
+  params: string
+) => GetCocktailBySearching;
+export const getCocktailBySearching: GetCocktailByCategory = (
+  filter,
+  params
 ) => {
   return {
     type: ActionTypes.GET_COCKTAIL_BY_CATEGORY,
-    payload: api.getCocktailByCategory(category)
+    payload: api.getCocktailBySearching(filter, params)
   };
 };
 

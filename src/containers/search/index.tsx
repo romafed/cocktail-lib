@@ -9,11 +9,12 @@ import { StateType } from "../../store/rootReducer";
 import view from "./view";
 
 const mapStateToProps = (state: StateType) => ({
+  loading: searchSelectors.getLoadingSelector(state),
+  filters: searchSelectors.getFiltersSelector(state),
   categories: searchSelectors.getCategoriesSelector(state),
   ingredients: searchSelectors.getIngredientsSelector(state),
   glasses: searchSelectors.getGlassesSelector(state),
   alcoholics: searchSelectors.getAlcoholicSelector(state),
-  loading: searchSelectors.getLoadingSelector(state),
   cocktails: searchSelectors.getCocktailsSelector(state)
 });
 

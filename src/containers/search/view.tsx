@@ -8,15 +8,13 @@ import {
   Glass,
   Alcoholic,
   Cocktail
-} from "../../store/search/actionsTypes";
+} from "../../store/search/types";
 
-import Spinner from "../../components/Spinner";
 import SearchForm from "../../components/SearchForm";
 import CocktailList from "../../components/CocktailList";
 
 // Styles
 const StyledSearch = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,11 +32,14 @@ const Header = styled.h1`
 `;
 
 const view = ({
-  loading,
+  filters,
   categories,
+  ingredients,
+  alcoholics,
+  glasses,
   cocktails,
   handleGetAllList,
-  getCocktailByCategory
+  getCocktailBySearching
 }: SearchProps) => {
   useEffect(() => {
     handleGetAllList();
@@ -48,16 +49,22 @@ const view = ({
     <StyledSearch>
       <Header>Search for your cocktail</Header>
       <SearchForm
-        onSubmitForm={getCocktailByCategory}
-        categories={categories}
+        filters={filters}
+        values={{
+          ingredients,
+          categories,
+          alcoholics,
+          glasses
+        }}
+        onSubmitForm={getCocktailBySearching}
       />
       <CocktailList cocktails={cocktails} />
-      <Spinner show={loading} />
     </StyledSearch>
   );
 };
 
 interface SearchProps {
+  filters: Array<string>;
   categories: Category[];
   ingredients: Ingredient[];
   glasses: Glass[];
@@ -65,7 +72,7 @@ interface SearchProps {
   cocktails: Cocktail[];
   loading: Boolean;
   handleGetAllList: () => void;
-  getCocktailByCategory: (category: string) => void;
+  getCocktailBySearching: (filter: string, params: string) => void;
 }
 
 export default view;

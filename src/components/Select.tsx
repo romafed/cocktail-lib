@@ -2,26 +2,28 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 
-import {
-  Category,
-  Ingredient,
-  Glass,
-  Alcoholic
-} from "../store/search/actionsTypes";
+import { Category, Ingredient, Glass, Alcoholic } from "../store/search/types";
 
 import * as utils from "../utils";
 
 const StyledSelect: any = styled.div`
+  outline: none;
   color: #fff;
   position: relative;
   min-width: 200px;
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
-  z-index: 10;
   border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
+  ${(props: any) => props.disabled && "opacity: 0.5; pointer-events: none;"};
+  &:hover .optionsContainer {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  &:focus {
+    z-index: 100;
+  }
 `;
 
-const SelectedOption = styled.div`
+const SelectedOption: any = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,7 +32,7 @@ const SelectedOption = styled.div`
   cursor: pointer;
 `;
 
-const OptionsContainer = styled.div`
+const OptionsContainer: any = styled.div`
   width: 100%;
   max-height: 300px;
   overflow-x: hidden;
@@ -38,14 +40,10 @@ const OptionsContainer = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
-  z-index: 999;
   transition: all 0.3s ease-in-out;
-  &:hover {
-    background-color: rgba(0, 0, 0, 1);
-  }
 `;
 
-const StyledOption = styled.div`
+const StyledOption: any = styled.div`
   cursor: pointer;
   margin: 0.5rem 0;
   transition: all 0.3s ease-in-out;
@@ -67,31 +65,37 @@ const Option = ({ children, onClick }: any) => {
   return <StyledOption onClick={onClick}>{children}</StyledOption>;
 };
 
-const Select = ({ options, value, onChange, name }: SelectPropsType) => {
-  const arrOptions: Array<string> = utils.inArrayStr(options);
+const Select = ({
+  disabled = false,
+  options,
+  value,
+  onChange,
+  name,
+  placeholder
+}: SelectPropsType) => {
+  const arrOptions: Array<string> = options
+    ? utils.inArrayStr(options)
+    : ["Empty"];
 
   const [open, setOpen] = useState(false);
-  const [selectedValue, setValue] = useState(value);
   const transition = useTransition(open, null, {
     from: { opacity: 0, transform: "translateX(-20px)" },
     enter: { opacity: 1, transform: "translateX(0)" },
     leave: { opacity: 0, transform: "translateX(-20px)" }
   });
-
   const handleOpen = (): void => {
     setOpen(!open);
   };
 
   const handleChange = (value: string): void => {
-    setValue(value);
     setOpen(false);
     onChange(name, value, true);
   };
 
   return (
-    <StyledSelect isOpen={open}>
+    <StyledSelect disabled={disabled} tabIndex={1} id='select' isOpen={open}>
       <SelectedOption onClick={handleOpen}>
-        {selectedValue}
+        {value || placeholder}
         <Icon isOpen={open} className='material-icons'>
           keyboard_arrow_down
         </Icon>
@@ -100,7 +104,7 @@ const Select = ({ options, value, onChange, name }: SelectPropsType) => {
         ({ item, key, props }) =>
           item && (
             <animated.div key={key} style={{ ...props }}>
-              <OptionsContainer>
+              <OptionsContainer className='optionsContainer'>
                 {arrOptions.map((item: any, index: number) => (
                   <Option onClick={() => handleChange(item)} key={index}>
                     {item}
@@ -114,12 +118,14 @@ const Select = ({ options, value, onChange, name }: SelectPropsType) => {
   );
 };
 interface SelectPropsType {
-  options: Array<Category | Ingredient | Glass | Alcoholic>;
+  disabled?: Boolean;
+  placeholder: string;
+  options: Array<Category | Ingredient | Glass | Alcoholic | string>;
   value: string;
   name: string;
   onChange: (
     field: string,
-    value: any,
+    value: string | null,
     shouldValidate?: boolean | undefined
   ) => any;
 }

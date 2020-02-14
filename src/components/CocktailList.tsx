@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
-import { Cocktail } from "../store/search/actionsTypes";
+import { Cocktail } from "../store/search/types";
 
 import CocktailCard from "./CocktailCard";
 

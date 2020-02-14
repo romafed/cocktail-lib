@@ -1,8 +1,9 @@
-import { ActionTypes, SearchState } from "./actionsTypes";
+import { ActionTypes, SearchState } from "./types";
 import { AnyAction } from "redux";
 
 const initialState: SearchState = {
   loading: false,
+  filters: ["Categories", "Ingredients", "Alcoholics", "Glasses"],
   categories: [],
   ingredients: [],
   glasses: [],

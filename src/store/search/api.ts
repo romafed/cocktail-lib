@@ -1,7 +1,8 @@
 import axios from "../axios";
 import { AxiosResponse, AxiosRequestConfig } from "axios";
+import { firstLetterToLowerCase } from "../../utils";
 
-const url = (type: string) =>
+const url = (type: string): string =>
   `https://the-cocktail-db.p.rapidapi.com/${type}.php`;
 
 export const getCategories = async () => {
@@ -48,13 +49,18 @@ export const getGlasses = async () => {
   return res.data.drinks;
 };
 
-export const getCocktailByCategory = async (category: string) => {
+export const getCocktailBySearching = async (
+  filter: string,
+  params: string
+) => {
+  const paramsKey = firstLetterToLowerCase(filter).charAt(0);
+  console.log(paramsKey, params);
   const config: AxiosRequestConfig = {
     params: {
-      c: category
+      [`${paramsKey}`]: params
     }
   };
 
-  const res: AxiosResponse = await axios.get(url("filter"), config);
+  const res: AxiosResponse = await axios.get(url('filter'), config);
   return res.data.drinks;
 };

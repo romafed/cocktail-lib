@@ -60,12 +60,12 @@ export default (state = initialState, action: AnyAction): SearchState => {
         loading: false,
         glasses: action.payload
       };
-    case ActionTypes.GET_COCKTAIL_BY_CATEGORY_PENDING:
+    case ActionTypes.GET_COCKTAIL_BY_SEARCHING_PENDING:
       return {
         ...state,
         loading: true
       };
-    case ActionTypes.GET_COCKTAIL_BY_CATEGORY_FULFILLED:
+    case ActionTypes.GET_COCKTAIL_BY_SEARCHING_FULFILLED:
       return {
         ...state,
         loading: false,

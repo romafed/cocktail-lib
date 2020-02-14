@@ -39,16 +39,23 @@ const view = ({
   glasses,
   cocktails,
   handleGetAllList,
-  getCocktailBySearching
+  getCocktailBySearching,
+  setIngredientForSearch,
+  ingredientForSearch
 }: SearchProps) => {
   useEffect(() => {
     handleGetAllList();
-  }, [handleGetAllList]);
+    if (ingredientForSearch) {
+      getCocktailBySearching("ingredients", ingredientForSearch);
+      setIngredientForSearch("");
+    }
+  }, [ingredientForSearch, getCocktailBySearching, handleGetAllList]);
 
   return (
     <StyledSearch>
       <Header>Search for your cocktail</Header>
       <SearchForm
+        ingredientForSearch={ingredientForSearch}
         filters={filters}
         values={{
           ingredients,
@@ -64,6 +71,7 @@ const view = ({
 };
 
 interface SearchProps {
+  location: any;
   filters: Array<string>;
   categories: Category[];
   ingredients: Ingredient[];
@@ -71,8 +79,10 @@ interface SearchProps {
   alcoholics: Alcoholic[];
   cocktails: Cocktail[];
   loading: Boolean;
+  ingredientForSearch: string;
   handleGetAllList: () => void;
   getCocktailBySearching: (filter: string, params: string) => void;
+  setIngredientForSearch: (ingredient: string) => void;
 }
 
 export default view;

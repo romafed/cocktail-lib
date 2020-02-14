@@ -7,7 +7,7 @@ import { SearchState, SearchActionTypes } from "./search/types";
 
 export interface StateType {
   searchState: SearchState;
-  detailsState: any
+  detailsState: any;
 }
 
 const rootReducer: Reducer<

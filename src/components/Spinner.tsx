@@ -50,7 +50,7 @@ const Spinner = ({ show }: SpinnerPropsType) => {
       {transition.map(
         ({ item, key, props }) =>
           item && (
-            <animated.div key={key} style={props}>
+            <animated.div key={key} style={{ zIndex: 200, ...props }}>
               <SpinnerWrapper>
                 <StyledSpinner />
               </SpinnerWrapper>

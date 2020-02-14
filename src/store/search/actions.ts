@@ -52,7 +52,7 @@ export const getCocktailBySearching: GetCocktailByCategory = (
   params
 ) => {
   return {
-    type: ActionTypes.GET_COCKTAIL_BY_CATEGORY,
+    type: ActionTypes.GET_COCKTAIL_BY_SEARCHING,
     payload: api.getCocktailBySearching(filter, params)
   };
 };

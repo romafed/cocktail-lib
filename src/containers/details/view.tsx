@@ -41,7 +41,7 @@ const StyledCocktailDetail = styled.div`
 `;
 
 const Description = styled.div`
-  font-size: 0.5em;
+  font-size: 0.4em;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   padding: 1em;
@@ -92,17 +92,33 @@ const Item: any = styled.li`
   font-family: "Galada", cursive;
   letter-spacing: 3px;
   margin: 0.7em;
-  font-size: .7em;
+  font-size: 0.7em;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+    text-shadow: 2px 2px 2px rgba(206, 89, 55, 0);
+  }
 `;
 
 const view = ({
   match,
+  history,
   cocktailDetails,
-  getCocktailDetails
+  error,
+  getCocktailDetails,
+  setIngredientForSearch
 }: ViewPropsType) => {
+  const handleIngredientForSearch = (item: string) => {
+    setIngredientForSearch(item);
+    history.push("/");
+  };
+
   useEffect(() => {
     getCocktailDetails(match.params.id);
-  }, []);
+    if (error) history.push("/");
+  }, [error]);
 
   return (
     <StyledCocktailDetail>
@@ -129,7 +145,9 @@ const view = ({
         <MainText fontSize='1.3em'>Ingredients: </MainText>
         <ol>
           {utils.arrayOfIngredients(cocktailDetails).map((item, index) => (
-            <Item key={index}>{item}</Item>
+            <Item onClick={() => handleIngredientForSearch(item)} key={index}>
+              {item}
+            </Item>
           ))}
         </ol>
       </Ingredients>
@@ -142,10 +160,13 @@ const view = ({
 };
 
 interface ViewPropsType {
+  history: any;
   match: any;
   loading: Boolean;
   cocktailDetails: any;
+  error: Boolean;
   getCocktailDetails: (cocktailId: string) => void;
+  setIngredientForSearch: (ingredient: string) => void;
 }
 
 export default view;

@@ -15,6 +15,7 @@ const StyledSelect: any = styled.div`
   transition: all 0.3s ease-in-out;
   border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
   ${(props: any) => props.disabled && "opacity: 0.5; pointer-events: none;"};
+  z-index: 10;
   &:hover .optionsContainer {
     background-color: rgba(0, 0, 0, 1);
   }
@@ -41,6 +42,7 @@ const OptionsContainer: any = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
   transition: all 0.3s ease-in-out;
+  z-index: 30;
 `;
 
 const StyledOption: any = styled.div`

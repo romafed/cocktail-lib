@@ -17,11 +17,16 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
-const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
+const SearchForm = ({
+  ingredientForSearch,
+  filters,
+  values,
+  onSubmitForm
+}: SearchFormType) => {
   const formik = useFormik({
     initialValues: {
-      filters: "",
-      type: ""
+      filters: ingredientForSearch ? "ingredients" : "",
+      type: ingredientForSearch || ""
     },
     validate: values => {
       const error: any = {};
@@ -32,7 +37,6 @@ const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
       return error;
     },
     onSubmit: values => {
-      console.log(values);
       onSubmitForm(values.filters, values.type);
     }
   });
@@ -43,7 +47,7 @@ const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
     shouldValidate?: boolean | undefined
   ) => {
     formik.setFieldValue("type", "", shouldValidate);
-    formik.setFieldValue("filters", value, shouldValidate);
+    formik.setFieldValue(name, value, shouldValidate);
   };
 
   return (
@@ -59,7 +63,7 @@ const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
         <Select
           name='type'
           placeholder={
-            formik.values.filters || !formik.values.type
+            formik.values.filters || formik.values.type
               ? `Select ${formik.values.filters}`
               : "First select filter"
           }
@@ -74,7 +78,10 @@ const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
           Search
         </Button>
       </InputGroup>
-      <Error message={formik.errors.type} />
+      <Error
+        show={!!(formik.touched && formik.errors.type)}
+        message={formik.errors.type}
+      />
     </FormContainer>
   );
 };
@@ -82,6 +89,7 @@ const SearchForm = ({ filters, values, onSubmitForm }: SearchFormType) => {
 interface SearchFormType {
   values: any;
   filters: Array<string>;
+  ingredientForSearch: string;
   onSubmitForm: (filter: string, params: string) => void;
 }
 

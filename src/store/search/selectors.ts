@@ -20,3 +20,6 @@ export const getCocktailsSelector = (state: StateType) =>
 
 export const getFiltersSelector = (state: StateType) =>
   state.searchState.filters;
+
+export const getIngredientForSearchSelector = (state: StateType) =>
+  state.detailsState.ingredientForSearch;

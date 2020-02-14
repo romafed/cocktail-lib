@@ -14,8 +14,8 @@ const ErrorText = styled.p`
   text-align: center;
 `;
 
-const Error = ({ message }: ErrorPropsType) => {
-  const transitions = useTransition(message, null, {
+const Error = ({ message, show }: ErrorPropsType) => {
+  const transitions = useTransition(show, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 }
@@ -28,7 +28,7 @@ const Error = ({ message }: ErrorPropsType) => {
           item && (
             <animated.div key={key} style={props}>
               <StyledError>
-                <ErrorText>{item}</ErrorText>
+                <ErrorText>{message}</ErrorText>
               </StyledError>
             </animated.div>
           )
@@ -39,6 +39,7 @@ const Error = ({ message }: ErrorPropsType) => {
 
 interface ErrorPropsType {
   message: string | undefined;
+  show: Boolean;
 }
 
 export default Error;

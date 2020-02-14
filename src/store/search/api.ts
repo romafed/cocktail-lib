@@ -54,7 +54,6 @@ export const getCocktailBySearching = async (
   params: string
 ) => {
   const paramsKey = firstLetterToLowerCase(filter).charAt(0);
-  console.log(paramsKey, params);
   const config: AxiosRequestConfig = {
     params: {
       [`${paramsKey}`]: params

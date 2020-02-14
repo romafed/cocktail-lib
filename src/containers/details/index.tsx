@@ -10,7 +10,8 @@ import view from "./view";
 
 const mapStateToProps = (state: StateType) => ({
   cocktailDetails: detailsSelectors.getCocktailDetailsSelector(state),
-  loading: detailsSelectors.getLoadingSelector(state)
+  loading: detailsSelectors.getLoadingSelector(state),
+  error: detailsSelectors.getErrorSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

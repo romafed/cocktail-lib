@@ -7,8 +7,10 @@ import {
   GetAlcoholicAction,
   GetIngredientsAction,
   GetGlassesAction,
-  GetCocktailBySearching
+  GetCocktailBySearching,
+  SetCurrentSearchTypeAction
 } from "./types";
+
 import * as api from "./api";
 
 type GetCategories = () => GetCategoriesAction;
@@ -43,11 +45,19 @@ const getGlasses: GetGlasses = () => {
   };
 };
 
-type GetCocktailByCategory = (
+type SetCurrentSearchType = (type: string) => SetCurrentSearchTypeAction;
+const setCurrentSearchType: SetCurrentSearchType = type => {
+  return {
+    type: ActionTypes.SET_CURRENT_SEARCH_TYPE,
+    payload: type
+  };
+};
+
+type GetCocktailBySearchingAction = (
   filter: string,
   params: string
 ) => GetCocktailBySearching;
-export const getCocktailBySearching: GetCocktailByCategory = (
+const getCocktailBySearching: GetCocktailBySearchingAction = (
   filter,
   params
 ) => {
@@ -55,6 +65,19 @@ export const getCocktailBySearching: GetCocktailByCategory = (
     type: ActionTypes.GET_COCKTAIL_BY_SEARCHING,
     payload: api.getCocktailBySearching(filter, params)
   };
+};
+
+type HandleGetCocktailBySearching = (
+  filter: string,
+  params: string
+) => ThunkAction<Promise<void>, {}, {}, AnyAction>;
+export const handleGetCocktailBySearching: HandleGetCocktailBySearching = (
+  filter,
+  params
+) => async (dispatch, getState: any) => {
+  if (getState().searchState.currentSearchFilter === params) return;
+  dispatch(setCurrentSearchType(params));
+  dispatch(getCocktailBySearching(filter, params));
 };
 
 type HandleGetAllList = () => ThunkAction<Promise<void>, {}, {}, AnyAction>;

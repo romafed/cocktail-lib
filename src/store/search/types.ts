@@ -22,7 +22,9 @@ export enum ActionTypes {
   GET_COCKTAIL_BY_SEARCHING = "GET_COCKTAIL_BY_SEARCHING",
   GET_COCKTAIL_BY_SEARCHING_PENDING = "GET_COCKTAIL_BY_SEARCHING_PENDING",
   GET_COCKTAIL_BY_SEARCHING_FULFILLED = "GET_COCKTAIL_BY_SEARCHING_FULFILLED",
-  GET_COCKTAIL_BY_SEARCHING_REJECTED = "GET_COCKTAIL_BY_SEARCHING_REJECTED"
+  GET_COCKTAIL_BY_SEARCHING_REJECTED = "GET_COCKTAIL_BY_SEARCHING_REJECTED",
+
+  SET_CURRENT_SEARCH_TYPE = "SET_CURRENT_SEARCH_TYPE"
 }
 
 // Common types
@@ -48,6 +50,7 @@ export interface Cocktail {
 
 export interface SearchState {
   loading: Boolean;
+  currentSearchFilter: string;
   filters: Array<string>;
   categories: Category[];
   alcoholics: Alcoholic[];
@@ -81,10 +84,15 @@ export interface GetCocktailBySearching {
   type: string;
   payload: Promise<Cocktail[]>;
 }
+export interface SetCurrentSearchTypeAction {
+  type: string;
+  payload: string;
+}
 
 export type SearchActionTypes =
   | GetCategoriesAction
   | GetAlcoholicAction
   | GetIngredientsAction
   | GetGlassesAction
-  | GetCocktailBySearching;
+  | GetCocktailBySearching
+  | SetCurrentSearchTypeAction;

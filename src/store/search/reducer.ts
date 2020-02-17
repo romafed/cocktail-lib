@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 
 const initialState: SearchState = {
   loading: false,
+  currentSearchFilter: "",
   filters: ["Categories", "Ingredients", "Alcoholics", "Glasses"],
   categories: [],
   ingredients: [],
@@ -59,6 +60,11 @@ export default (state = initialState, action: AnyAction): SearchState => {
         ...state,
         loading: false,
         glasses: action.payload
+      };
+    case ActionTypes.SET_CURRENT_SEARCH_TYPE:
+      return {
+        ...state,
+        currentSearchFilter: action.payload
       };
     case ActionTypes.GET_COCKTAIL_BY_SEARCHING_PENDING:
       return {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
 
@@ -17,19 +17,20 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
-const SearchForm = ({
+const SearchForm: FunctionComponent<SearchFormProps> = ({
   ingredientForSearch,
   filters,
   values,
   onSubmitForm
-}: SearchFormType) => {
+}) => {
   const formik = useFormik({
     initialValues: {
       filters: ingredientForSearch ? "ingredients" : "",
       type: ingredientForSearch || ""
     },
     validate: values => {
-      const error: any = {};
+      type Error = { type?: string };
+      const error: Error = {};
       if (!values.type) {
         error.type = `Select ${values.filters}`;
       }
@@ -86,11 +87,11 @@ const SearchForm = ({
   );
 };
 
-interface SearchFormType {
+type SearchFormProps = {
   values: any;
   filters: Array<string>;
   ingredientForSearch: string;
   onSubmitForm: (filter: string, params: string) => void;
-}
+};
 
 export default SearchForm;

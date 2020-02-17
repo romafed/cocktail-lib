@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React, { FunctionComponent } from "react";
+import styled, { StyledComponent } from "styled-components";
 
-const StyledButton: any = styled.button`
+const StyledButton: StyledComponent<"button", any, any, never> = styled.button`
   border: 2px solid yellow;
   min-width: 100px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -23,7 +23,11 @@ const StyledButton: any = styled.button`
   }
 `;
 
-const Button = ({ type, children, disabled = false }: ButtonPropsType) => {
+const Button: FunctionComponent<ButtonProps> = ({
+  children,
+  type,
+  disabled = false
+}) => {
   return (
     <StyledButton disabled={disabled} type={type}>
       {children}
@@ -31,10 +35,9 @@ const Button = ({ type, children, disabled = false }: ButtonPropsType) => {
   );
 };
 
-interface ButtonPropsType {
-  children: string;
-  type: string;
-  disabled?: Boolean;
-}
+type ButtonProps = {
+  type: "button" | "submit" | "reset" | undefined;
+  disabled?: Boolean | undefined;
+};
 
 export default Button;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 const StyledText = styled.p`
@@ -8,7 +8,7 @@ const StyledText = styled.p`
   }
 `;
 
-const Text = ({ children, show = true, title }: TextPropsType) => {
+const Text: FunctionComponent<TextProps> = ({ children, show = true, title }) => {
   return (
     <>
       {show && (
@@ -21,9 +21,9 @@ const Text = ({ children, show = true, title }: TextPropsType) => {
   );
 };
 
-interface TextPropsType {
+type TextProps = {
   children: string;
-  show?: string | null | Boolean;
+  show: string | null | Boolean;
   title?: string;
 }
 

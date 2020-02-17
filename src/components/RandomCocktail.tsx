@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 import styled from "styled-components";
 
 const StyledRandomCocktail = styled.div``;
@@ -7,7 +7,7 @@ const Title = styled.h4``;
 
 const Image = styled.img``;
 
-const RandomCocktail = ({}: RandomCocktailTypes) => {
+const RandomCocktail: FunctionComponent<RandomCocktailProps> = () => {
   return (
     <StyledRandomCocktail>
       <Title>Title</Title>
@@ -15,7 +15,7 @@ const RandomCocktail = ({}: RandomCocktailTypes) => {
   );
 };
 
-interface RandomCocktailTypes {
+type RandomCocktailProps = {
   getRandomCocktail: () => void;
   randomCocktail: any;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FunctionComponent } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 
@@ -6,15 +6,19 @@ import { Category, Ingredient, Glass, Alcoholic } from "../store/search/types";
 
 import * as utils from "../utils";
 
-const StyledSelect: any = styled.div`
+type StyledSelect = {
+  disabled?: Boolean;
+  isOpen: Boolean;
+};
+const StyledSelect = styled.div<StyledSelect>`
   outline: none;
   color: #fff;
   position: relative;
   min-width: 200px;
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
-  border-bottom: 2px solid ${(props: any) => (props.isOpen ? "red" : "yellow")};
-  ${(props: any) => props.disabled && "opacity: 0.5; pointer-events: none;"};
+  border-bottom: 2px solid ${props => (props.isOpen ? "red" : "yellow")};
+  ${props => props.disabled && "opacity: 0.5; pointer-events: none;"};
   z-index: 10;
   &:hover .optionsContainer {
     background-color: rgba(0, 0, 0, 1);
@@ -24,7 +28,7 @@ const StyledSelect: any = styled.div`
   }
 `;
 
-const SelectedOption: any = styled.div`
+const SelectedOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +37,7 @@ const SelectedOption: any = styled.div`
   cursor: pointer;
 `;
 
-const OptionsContainer: any = styled.div`
+const OptionsContainer = styled.div`
   width: 100%;
   max-height: 300px;
   overflow-x: hidden;
@@ -45,7 +49,7 @@ const OptionsContainer: any = styled.div`
   z-index: 30;
 `;
 
-const StyledOption: any = styled.div`
+const StyledOption = styled.div`
   cursor: pointer;
   margin: 0.5rem 0;
   transition: all 0.3s ease-in-out;
@@ -56,25 +60,27 @@ const StyledOption: any = styled.div`
   }
 `;
 
-const Icon: any = styled.i`
+const Icon = styled.i<StyledSelect>`
   transition: all 0.3s ease-in-out;
-  transform: ${(props: any) =>
-    props.isOpen ? "rotate(0deg)" : "rotate(180deg)"};
-  color: ${(props: any) => (props.isOpen ? "red" : "yellow")};
+  transform: ${props => (props.isOpen ? "rotate(0deg)" : "rotate(180deg)")};
+  color: ${props => (props.isOpen ? "red" : "yellow")};
 `;
 
-const Option = ({ children, onClick }: any) => {
+type OptionTypes = {
+  onClick: () => void;
+};
+const Option: FunctionComponent<OptionTypes> = ({ children, onClick }) => {
   return <StyledOption onClick={onClick}>{children}</StyledOption>;
 };
 
-const Select = ({
+const Select: FunctionComponent<SelectProps> = ({
   disabled = false,
   options,
   value,
   onChange,
   name,
   placeholder
-}: SelectPropsType) => {
+}) => {
   const arrOptions: Array<string> = options
     ? utils.inArrayStr(options)
     : ["Empty"];
@@ -119,7 +125,8 @@ const Select = ({
     </StyledSelect>
   );
 };
-interface SelectPropsType {
+
+type SelectProps = {
   disabled?: Boolean;
   placeholder: string;
   options: Array<Category | Ingredient | Glass | Alcoholic | string>;
@@ -130,6 +137,6 @@ interface SelectPropsType {
     value: string | null,
     shouldValidate?: boolean | undefined
   ) => any;
-}
+};
 
 export default Select;

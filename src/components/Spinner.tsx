@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled, { keyframes } from "styled-components";
 import { useTransition, animated } from "react-spring";
 
@@ -38,7 +38,7 @@ const StyledSpinner = styled.div`
   z-index: 300;
 `;
 
-const Spinner = ({ show }: SpinnerPropsType) => {
+const Spinner: FunctionComponent<SpinnerProps> = ({ show }) => {
   const transition = useTransition(show, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -61,7 +61,7 @@ const Spinner = ({ show }: SpinnerPropsType) => {
   );
 };
 
-interface SpinnerPropsType {
+type SpinnerProps = {
   show: Boolean;
 }
 

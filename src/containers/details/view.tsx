@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
 
 import Text from "../../components/Text";
@@ -73,14 +73,18 @@ const Image = styled.img`
   box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
 `;
-
-const MainText: any = styled.h1`
+type MainTextProps = {
+  fontSize: string;
+  position?: "absolute";
+  align?: string;
+};
+const MainText = styled.h1<MainTextProps>`
   display: inline-block;
   width: 100%;
-  position: ${(props: any) => props.position || "initial"};
-  font-size: ${(props: any) => props.fontSize};
+  position: ${props => props.position || "initial"};
+  font-size: ${props => props.fontSize};
   font-family: "Galada", cursive;
-  text-align: ${(props: any) => props.align || "left"};
+  text-align: ${props => props.align || "left"};
   color: yellow;
   display: inline-block;
   transition: all 0.3s ease-in-out;
@@ -88,7 +92,7 @@ const MainText: any = styled.h1`
   margin: 0;
 `;
 
-const Item: any = styled.li`
+const Item = styled.li`
   font-family: "Galada", cursive;
   letter-spacing: 3px;
   margin: 0.7em;
@@ -102,14 +106,14 @@ const Item: any = styled.li`
   }
 `;
 
-const view = ({
+const view: FunctionComponent<ViewProps> = ({
   match,
   history,
   cocktailDetails,
   error,
   getCocktailDetails,
   setIngredientForSearch
-}: ViewPropsType) => {
+}) => {
   const handleIngredientForSearch = (item: string) => {
     setIngredientForSearch(item);
     history.push("/");
@@ -159,7 +163,7 @@ const view = ({
   );
 };
 
-interface ViewPropsType {
+type ViewProps = {
   history: any;
   match: any;
   loading: Boolean;
@@ -167,6 +171,6 @@ interface ViewPropsType {
   error: Boolean;
   getCocktailDetails: (cocktailId: string) => void;
   setIngredientForSearch: (ingredient: string) => void;
-}
+};
 
 export default view;

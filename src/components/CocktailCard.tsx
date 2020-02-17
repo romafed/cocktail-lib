@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Cocktail } from "../store/search/types";
@@ -36,7 +36,7 @@ const CocktailImage = styled.img`
   border-radius: 1rem;
 `;
 
-const CocktailCard = ({ cocktail }: CocktailCardType) => {
+const CocktailCard: FunctionComponent<CocktailCardProps> = ({ cocktail }) => {
   const history = useHistory();
 
   return (
@@ -48,8 +48,8 @@ const CocktailCard = ({ cocktail }: CocktailCardType) => {
   );
 };
 
-interface CocktailCardType {
+type CocktailCardProps = {
   cocktail: Cocktail;
-}
+};
 
 export default CocktailCard;

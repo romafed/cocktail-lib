@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 
@@ -14,7 +14,7 @@ const ErrorText = styled.p`
   text-align: center;
 `;
 
-const Error = ({ message, show }: ErrorPropsType) => {
+const Error: FunctionComponent<ErrorProps> = ({ message, show }) => {
   const transitions = useTransition(show, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -37,7 +37,7 @@ const Error = ({ message, show }: ErrorPropsType) => {
   );
 };
 
-interface ErrorPropsType {
+type ErrorProps = {
   message: string | undefined;
   show: Boolean;
 }

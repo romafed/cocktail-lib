@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
 
 import {
@@ -31,7 +31,7 @@ const Header = styled.h1`
   transition: all 0.3s ease-in-out;
 `;
 
-const view = ({
+const view: FunctionComponent<SearchProps> = ({
   filters,
   categories,
   ingredients,
@@ -42,7 +42,7 @@ const view = ({
   setIngredientForSearch,
   ingredientForSearch,
   handleGetCocktailBySearching
-}: SearchProps) => {
+}) => {
   useEffect(() => {
     handleGetAllList();
     if (ingredientForSearch) {

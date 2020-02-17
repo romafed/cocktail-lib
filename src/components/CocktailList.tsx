@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 import { Cocktail } from "../store/search/types";
@@ -14,7 +14,7 @@ const ListWrapper = styled.div`
   padding: 1rem;
 `;
 
-const CocktailList = ({ cocktails }: CocktailListType) => {
+const CocktailList: FunctionComponent<CocktailListProps> = ({ cocktails }) => {
   const transitions = useTransition(cocktails, cocktail => cocktail.idDrink, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -32,8 +32,8 @@ const CocktailList = ({ cocktails }: CocktailListType) => {
   );
 };
 
-interface CocktailListType {
+type CocktailListProps = {
   cocktails: Cocktail[];
-}
+};
 
 export default CocktailList;

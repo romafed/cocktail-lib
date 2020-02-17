@@ -31,7 +31,7 @@ const SearchForm = ({
     validate: values => {
       const error: any = {};
       if (!values.type) {
-        error.type = "Select field";
+        error.type = `Select ${values.filters}`;
       }
 
       return error;
@@ -73,13 +73,13 @@ const SearchForm = ({
           options={values[firstLetterToLowerCase(formik.values.filters)]}
         />
         <Button
-          disabled={!!(formik.touched && formik.errors.type)}
+          disabled={!!(formik.touched.type && formik.errors.type)}
           type='submit'>
           Search
         </Button>
       </InputGroup>
       <Error
-        show={!!(formik.touched && formik.errors.type)}
+        show={!!(formik.touched.type && formik.errors.type)}
         message={formik.errors.type}
       />
     </FormContainer>

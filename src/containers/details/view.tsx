@@ -21,15 +21,16 @@ const StyledCocktailDetail = styled.div`
   justify-content: center;
   color: #fff;
   margin: 0;
-  padding: 1em;
+  padding: 0.5em;
   @media (max-width: 600px) {
+    font-size: 2rem !important;
     width: 100%;
     height: 100%;
     grid-template-rows: auto;
     grid-template-columns: 100%;
   }
   @media (max-width: 850px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   @media (max-width: 1350px) {
     width: 100%;

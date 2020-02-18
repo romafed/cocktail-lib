@@ -13,7 +13,6 @@ import {
 } from "./types";
 
 import * as api from "./api";
-import { type } from "os";
 
 // Simple Actions
 type GetCategories = () => GetCategoriesAction;

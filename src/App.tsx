@@ -7,6 +7,8 @@ import Search from "./containers/search";
 import CocktailDetail from "./containers/details";
 import Spinner from "./components/Spinner";
 
+import { StateType } from './store/rootReducer'
+
 import BACKGROUND from "./assets/background.jpg";
 
 const StyledApp = styled.div`
@@ -24,8 +26,8 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const loadingOne = useSelector((state: any) => state.detailsState.loading);
-  const loadingTwo = useSelector((state: any) => state.searchState.loading);
+  const loadingOne = useSelector((state: StateType) => state.detailsState.loading);
+  const loadingTwo = useSelector((state: StateType) => state.searchState.loading);
   return (
     <StyledApp>
       <Switch>

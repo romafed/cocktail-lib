@@ -1,18 +1,28 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-const StyledText = styled.p`
+type StyledTextProps = {
+  fontSize: string | undefined;
+};
+
+const StyledText = styled.p<StyledTextProps>`
   strong {
     font-family: "Galada", cursive;
     letter-spacing: 3px;
+    ${props => props.fontSize && `font-size: ${props.fontSize}`}
   }
 `;
 
-const Text: FunctionComponent<TextProps> = ({ children, show = true, title }) => {
+const Text: FunctionComponent<TextProps> = ({
+  children,
+  show = true,
+  title,
+  fontSize
+}) => {
   return (
     <>
       {show && (
-        <StyledText>
+        <StyledText fontSize={fontSize}>
           <strong>{title}</strong>
           {children}
         </StyledText>
@@ -22,9 +32,9 @@ const Text: FunctionComponent<TextProps> = ({ children, show = true, title }) =>
 };
 
 type TextProps = {
-  children: string;
   show: string | null | Boolean;
   title?: string;
-}
+  fontSize?: string | undefined;
+};
 
 export default Text;

@@ -76,7 +76,7 @@ const RandomCocktail: FunctionComponent<RandomCocktailProps> = ({
 
   useEffect(() => {
     getRandomCocktail();
-  }, []);
+  }, [getRandomCocktail]);
 
   return (
     <>

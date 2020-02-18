@@ -20,7 +20,7 @@ const StyledCocktailDetail = styled.div`
   grid-template-columns: 50% 50%;
   justify-content: center;
   color: #fff;
-  margin: 0;
+  margin: auto;
   padding: 0.5em;
   @media (max-width: 600px) {
     font-size: 2rem !important;

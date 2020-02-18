@@ -9,7 +9,8 @@ const initialState: SearchState = {
   ingredients: [],
   glasses: [],
   alcoholics: [],
-  cocktails: []
+  cocktails: [],
+  randomCocktail: {}
 };
 
 export default (state = initialState, action: AnyAction): SearchState => {
@@ -76,6 +77,17 @@ export default (state = initialState, action: AnyAction): SearchState => {
         ...state,
         loading: false,
         cocktails: [...action.payload]
+      };
+    case ActionTypes.GET_RANDOM_COCKTAIL_PENDING:
+      return {
+        ...state,
+        loading: true
+      };
+    case ActionTypes.GET_RANDOM_COCKTAIL_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        randomCocktail: { ...action.payload[0] }
       };
     default:
       return state;

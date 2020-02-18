@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 
 import * as searchSelectors from "../../store/search/selectors";
 import * as searchActions from "../../store/search/actions";
-import { setIngredientForSearch } from '../../store/details/actions';
+import { setIngredientForSearch } from "../../store/details/actions";
 
 import { StateType } from "../../store/rootReducer";
 
@@ -17,6 +17,7 @@ const mapStateToProps = (state: StateType) => ({
   glasses: searchSelectors.getGlassesSelector(state),
   alcoholics: searchSelectors.getAlcoholicSelector(state),
   cocktails: searchSelectors.getCocktailsSelector(state),
+  randomCocktail: searchSelectors.getRandomCocktailSelector(state),
   ingredientForSearch: searchSelectors.getIngredientForSearchSelector(state)
 });
 

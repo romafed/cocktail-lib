@@ -63,3 +63,8 @@ export const getCocktailBySearching = async (
   const res: AxiosResponse = await axios.get(url('filter'), config);
   return res.data.drinks;
 };
+
+export const getRandomCocktail = async () => {
+  const res: AxiosResponse = await axios.get(url('random'));
+  return res.data.drinks;
+}

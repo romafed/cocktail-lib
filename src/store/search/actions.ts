@@ -8,11 +8,14 @@ import {
   GetIngredientsAction,
   GetGlassesAction,
   GetCocktailBySearching,
-  SetCurrentSearchTypeAction
+  SetCurrentSearchTypeAction,
+  GetRandomCocktailAction
 } from "./types";
 
 import * as api from "./api";
+import { type } from "os";
 
+// Simple Actions
 type GetCategories = () => GetCategoriesAction;
 const getCategories: GetCategories = () => {
   return {
@@ -67,6 +70,13 @@ const getCocktailBySearching: GetCocktailBySearchingAction = (
   };
 };
 
+type GetRandomCocktail = () => GetRandomCocktailAction;
+export const getRandomCocktail: GetRandomCocktail = () => ({
+  type: ActionTypes.GET_RANDOM_COCKTAIL,
+  payload: api.getRandomCocktail()
+});
+
+// Thunk Actions
 type HandleGetCocktailBySearching = (
   filter: string,
   params: string

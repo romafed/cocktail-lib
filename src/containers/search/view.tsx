@@ -13,14 +13,16 @@ import {
 
 import SearchForm from "../../components/SearchForm";
 import CocktailList from "../../components/CocktailList";
+import RandomCocktail from "../../components/RandomCocktail";
 
-// Styles
+// Styled Component
 const StyledSearch = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  padding: 1rem;
 `;
 
 const Header = styled.h1`
@@ -39,6 +41,8 @@ const view: FunctionComponent<SearchProps> = ({
   alcoholics,
   glasses,
   cocktails,
+  randomCocktail,
+  getRandomCocktail,
   handleGetAllList,
   setIngredientForSearch,
   ingredientForSearch,
@@ -66,7 +70,14 @@ const view: FunctionComponent<SearchProps> = ({
         }}
         onSubmitForm={handleGetCocktailBySearching}
       />
-      <CocktailList cocktails={cocktails} />
+      {cocktails.length <= 0 ? (
+        <RandomCocktail
+          randomCocktail={randomCocktail}
+          getRandomCocktail={getRandomCocktail}
+        />
+      ) : (
+        <CocktailList cocktails={cocktails} />
+      )}
     </StyledSearch>
   );
 };
@@ -80,6 +91,8 @@ interface SearchProps extends RouteComponentProps<any> {
   cocktails: Cocktail[];
   loading: Boolean;
   ingredientForSearch: string;
+  randomCocktail: {} | undefined;
+  getRandomCocktail: () => void;
   handleGetAllList: () => void;
   handleGetCocktailBySearching: (filter: string, params: string) => void;
   setIngredientForSearch: (ingredient: string) => void;

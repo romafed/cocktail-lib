@@ -21,5 +21,8 @@ export const getCocktailsSelector = (state: StateType) =>
 export const getFiltersSelector = (state: StateType) =>
   state.searchState.filters;
 
+export const getRandomCocktailSelector = (state: StateType) =>
+  state.searchState.randomCocktail;
+
 export const getIngredientForSearchSelector = (state: StateType) =>
   state.detailsState.ingredientForSearch;

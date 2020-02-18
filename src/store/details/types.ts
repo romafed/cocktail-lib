@@ -6,7 +6,16 @@ export enum ActionsTypes {
 
   SET_INGREDIENT = "SET_INGREDIENT"
 }
+//DETAILS STATE
 
+export interface DetailsState {
+  loading: Boolean;
+  ingredientForSearch: string;
+  cocktailDetails: {};
+  error: Boolean;
+}
+
+// Action Types
 export interface GetCocktailDetailAction {
   type: string;
   payload: Promise<any>;

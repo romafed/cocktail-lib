@@ -1,18 +1,19 @@
-import { combineReducers, Reducer, CombinedState } from "redux";
+import { combineReducers, Reducer, CombinedState, AnyAction } from "redux";
 
 import searchReducer from "./search/reducer";
 import detailsReducer from "./details/reducer";
 
-import { SearchState, SearchActionTypes } from "./search/types";
+import { SearchState } from "./search/types";
+import { DetailsState } from "./details/types";
 
 export interface StateType {
   searchState: SearchState;
-  detailsState: any;
+  detailsState: DetailsState;
 }
 
 const rootReducer: Reducer<
   CombinedState<StateType>,
-  SearchActionTypes
+  AnyAction
 > = combineReducers({
   searchState: searchReducer,
   detailsState: detailsReducer

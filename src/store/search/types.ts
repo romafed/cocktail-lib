@@ -46,8 +46,8 @@ export interface Cocktail {
   strDrinkThumb: string;
   idDrink: string;
 }
-// State type
 
+// SEARCH STATE
 export interface SearchState {
   loading: Boolean;
   currentSearchFilter: string;

@@ -1,14 +1,17 @@
 import { AnyAction } from "redux";
-import { ActionsTypes } from "./types";
+import { DetailsState, ActionsTypes } from "./types";
 
-const initialState = {
+const initialState: DetailsState = {
   loading: false,
-  ingredientForSearch: null,
+  ingredientForSearch: '',
   cocktailDetails: {},
   error: false
 };
 
-export default (state = initialState, { type, payload }: AnyAction) => {
+export default (
+  state = initialState,
+  { type, payload }: AnyAction
+): DetailsState => {
   switch (type) {
     case ActionsTypes.GET_COCKTAIL_DETAILS_PENDING:
       return {

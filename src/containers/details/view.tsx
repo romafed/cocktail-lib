@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
+import { RouteComponentProps } from "react-router-dom";
 
 import Text from "../../components/Text";
 
@@ -163,14 +164,15 @@ const view: FunctionComponent<ViewProps> = ({
   );
 };
 
-type ViewProps = {
-  history: any;
-  match: any;
-  loading: Boolean;
+type MatchParams = {
+  id: string;
+};
+
+interface ViewProps extends RouteComponentProps<MatchParams> {
   cocktailDetails: any;
   error: Boolean;
   getCocktailDetails: (cocktailId: string) => void;
   setIngredientForSearch: (ingredient: string) => void;
-};
+}
 
 export default view;

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
+import { RouteComponentProps } from "react-router-dom";
 
 import {
   Category,
@@ -70,8 +71,7 @@ const view: FunctionComponent<SearchProps> = ({
   );
 };
 
-interface SearchProps {
-  location: any;
+interface SearchProps extends RouteComponentProps<any> {
   filters: Array<string>;
   categories: Category[];
   ingredients: Ingredient[];

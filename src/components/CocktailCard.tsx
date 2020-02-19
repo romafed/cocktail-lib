@@ -39,9 +39,13 @@ const CocktailImage = styled.img`
 const CocktailCard: FunctionComponent<CocktailCardProps> = ({ cocktail }) => {
   const history = useHistory();
 
+  const handleRedirect = (id: string): void => {
+    history.push(`details/${id}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <StyledCocktailCard
-      onClick={() => history.push(`details/${cocktail.idDrink}`)}>
+    <StyledCocktailCard onClick={() => handleRedirect(cocktail.idDrink)}>
       <CocktailName>{cocktail.strDrink}</CocktailName>
       <CocktailImage src={cocktail.strDrinkThumb} alt='cocktail name' />
     </StyledCocktailCard>

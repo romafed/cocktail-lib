@@ -64,7 +64,7 @@ const RandomCocktail: FunctionComponent<RandomCocktailProps> = ({
 }) => {
   const history = useHistory();
 
-  const transition = useTransition(!!randomCocktail, null, {
+  const transition = useTransition(!!randomCocktail.strDrinkThumb, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 }

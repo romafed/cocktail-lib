@@ -9,36 +9,24 @@ import Text from "../../components/Text";
 import * as utils from "../../utils";
 
 const StyledCocktailDetail = styled.div`
-  font-size: 2rem;
-  box-sizing: border-box;
   position: relative;
-  width: 70%;
-  height: 90vh;
   display: grid;
-  grid-gap: 1em;
-  grid-template-rows: 50% 50%;
-  grid-template-columns: 50% 50%;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   justify-content: center;
+  width: 80%;
+  font-size: 30px;
   color: #fff;
-  margin: auto;
   padding: 0.5em;
   @media (max-width: 600px) {
     font-size: 2rem !important;
     width: 100%;
-    height: 100%;
     grid-template-rows: auto;
     grid-template-columns: 100%;
   }
   @media (max-width: 850px) {
     font-size: 2rem;
-  }
-  @media (max-width: 1350px) {
-    width: 100%;
-  }
-  @media (max-width: 1695px) {
-    img {
-      width: 100%;
-    }
   }
 `;
 
@@ -69,6 +57,7 @@ const Thumb = styled.div`
 
 const Image = styled.img`
   object-fit: cover;
+  width: 100%;
   height: 100%;
   -webkit-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.75);
@@ -102,10 +91,6 @@ const Item = styled.li`
   transition: all 0.3s ease-in-out;
   transform: scale(1);
   cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-    text-shadow: 2px 2px 2px rgba(206, 89, 55, 0);
-  }
 `;
 
 const view: FunctionComponent<ViewProps> = ({

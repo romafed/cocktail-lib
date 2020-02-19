@@ -87,9 +87,9 @@ const Select: FunctionComponent<SelectProps> = ({
 
   const [open, setOpen] = useState(false);
   const transition = useTransition(open, null, {
-    from: { opacity: 0, transform: "translateX(-20px)" },
-    enter: { opacity: 1, transform: "translateX(0)" },
-    leave: { opacity: 0, transform: "translateX(-20px)" }
+    from: { opacity: 0, transform: "translateX(-20px)", pointerEvents:'initial' },
+    enter: { opacity: 1, transform: "translateX(0)", pointerEvents:'initial' },
+    leave: { opacity: 0, transform: "translateX(-20px)", pointerEvents:'none' }
   });
   const handleOpen = (): void => {
     setOpen(!open);

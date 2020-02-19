@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 // Styled Component
 const StyledRandomCocktail = styled.div`
-  max-width: 500px;
+  max-width: 300px;
   padding: 1rem;
   display: "flex";
   flex-direction: column;

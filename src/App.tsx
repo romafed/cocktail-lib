@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Switch, Route, useLocation } from "react-router-dom";
@@ -13,25 +13,33 @@ import { StateType } from "./store/rootReducer";
 import BACKGROUND from "./assets/background.jpg";
 
 const StyledApp = styled.div`
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
   background-image: url(${BACKGROUND});
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
 `;
+
+const styles: CSSProperties = {
+  width: "100%",
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center"
+};
 
 const App = () => {
   const location = useLocation();
   const transition = useTransition(location, location => location.pathname, {
-    from: { position: "absolute", opacity: 0, transform: "translateY(-30px)" },
-    enter: { position: "initial", opacity: 1, transform: "translateY(0)" },
-    leave: { position: "absolute", opacity: 0, transform: "translateY(-30px)" }
+    from: { opacity: 0, position: "absolute", transform: "translateY(-30px)" },
+    enter: { opacity: 1, position: "relative", transform: "translateY(0)" },
+    leave: { opacity: 0, position: "absolute", transform: "translateY(-30px)" }
   });
   const loadingOne = useSelector(
     (state: StateType) => state.detailsState.loading
@@ -42,7 +50,7 @@ const App = () => {
   return (
     <StyledApp>
       {transition.map(({ item, key, props }) => (
-        <animated.div key={key} style={{ width: "100%", ...props }}>
+        <animated.div key={key} style={{ ...props, ...styles }}>
           <Switch location={item}>
             <Route exact path='/details/:id' component={CocktailDetail} />
             <Route path='/' component={Search} />
